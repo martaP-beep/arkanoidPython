@@ -1,6 +1,7 @@
 import pygame
 
 from Platforma import Platforma
+from Kulka import Kulka
 
 pygame.init()
  
@@ -18,7 +19,7 @@ status = True
 obraz_tla = pygame.image.load("images_arkanoid/background.png")
 
 platforma = Platforma()
-
+kulka = Kulka()
 
 while status:
     events = pygame.event.get()
@@ -34,8 +35,13 @@ while status:
     if wcisniete_klawisze[pygame.K_LEFT]:
         platforma.ruszaj_platforma(-1)
 
+
+    kulka.aktualizuj(platforma)
+    platforma.aktulizuj()
+
     screen_surface.blit(obraz_tla, (0,0))
     screen_surface.blit(platforma.obraz, platforma.rect)
+    screen_surface.blit(kulka.obraz, kulka.rect)
 
     pygame.display.flip()
     clock.tick(60)
